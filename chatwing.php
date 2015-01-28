@@ -14,7 +14,7 @@ License: GPLv2 or later
 Text Domain: chatwing
 */
 
-define('CHATWING_VERSION', '1.0');
+define('CHATWING_VERSION', '1.0.1');
 define('CHATWING_TEXTDOMAIN', 'chatwing');
 define('CHATWING_PATH', dirname(__FILE__));
 define('CHATWING_CLASS_PATH', CHATWING_PATH . '/classes');
@@ -23,7 +23,7 @@ define('CHATWING_PLG_MAIN_FILE', __FILE__);
 define('CHATWING_PLG_URL', plugin_dir_url(__FILE__));
 
 define('CHATWING_DEBUG', false);
-define('CW_USE_STAGING', true);
+define('CW_USE_STAGING', false);
 
 define('CHATWING_CLIENT_ID', 'wordpress');
 

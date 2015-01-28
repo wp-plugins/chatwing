@@ -3,8 +3,8 @@ Contributors: tridungpham
 Donate link: http://chatwing.com/
 Tags: chatwing, chatbox, community
 Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 1.0.0
+Tested up to: 3.8
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,7 +39,9 @@ Yes, you should have an access token in order to use this plugin. Please go to u
 == Screenshots ==
 
 == Changelog ==
+= 1.0.1 =
+* Fix plugin not use production server
 
-= 1.0 =
+= 1.0.0 =
 * Update to stable version for plugin.
 
