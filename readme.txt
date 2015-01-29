@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: tridungpham
 Donate link: http://chatwing.com/
-Tags: chatwing, chatbox, community
+Tags: chatwing, chatbox, community, admin, Chat, chat box, chat online, chat software, chat system, Chat Widget, chatbox, chat wing, Commenting, commenting system, contact plugin, contact us, customer support, envolve, free chat, IM Chat, live chat, live chat inc, live chat services, live chat software, live chatting, live help, live support, live web chat, livechat, online chat, online support, php live chat, plugin, Shoutbox, social chat, support software, Website Chat, widget, WordPress chat, wordpress live chat, wordpress live chat plugin, WordPress Plugin, wordpress chat, chatroom, chat room, chat rooms
 Requires at least: 3.0.1
 Tested up to: 3.8
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,9 @@ Instantly create new rooms, invite users, put any chat room directly on your web
 - Search for specific rooms you usually chat in on websites and blogs, take that room on the go once bookmarked.
 - Bookmark unlimited chats and have instant access anytime.
 - Many customization controls allow the ability to edit your text, fonts, insert video and images direct and much more.
+- Connect your room to the Chatwing Android and IOS (ipad/ipad) apps
+- Receive alerts and notifications of new messages via chatwing mobile apps
+- Embed Chatwing into any webpage both Javascript and Iframe HTML code are available for each room
 
 
 == Installation ==
