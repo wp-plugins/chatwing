@@ -4,7 +4,7 @@ Donate link: http://chatwing.com/
 Tags: chatwing, chatbox, community, admin, Chat, chat box, chat online, chat software, chat system, Chat Widget, chatbox, chat wing, Commenting, commenting system, contact plugin, contact us, customer support, envolve, free chat, IM Chat, live chat, live chat inc, live chat services, live chat software, live chatting, live help, live support, live web chat, livechat, online chat, online support, php live chat, plugin, Shoutbox, social chat, support software, Website Chat, widget, WordPress chat, wordpress live chat, wordpress live chat plugin, WordPress Plugin, wordpress chat, chatroom, chat room, chat rooms
 Requires at least: 3.0.1
 Tested up to: 3.8
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,7 +30,8 @@ Instantly create new rooms, invite users, put any chat room directly on your web
 == Installation ==
 
 1. Upload content of the plugin zip file to the `/wp-content/plugins/` directory
-1. Activate the plugin 'Chatwing' through the 'Plugins' menu in WordPress
+2. Activate the plugin 'Chatwing' through the 'Plugins' menu in WordPress
+3. Go to chatwing.com, log in to your account and get the access token for WordPress plugin in order to use the plugin - [detail guide here](http://chatwing.com/integrations/wordpress).
 
 == Frequently Asked Questions ==
 
