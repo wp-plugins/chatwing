@@ -14,7 +14,7 @@ License: GPLv2 or later
 Text Domain: chatwing
 */
 
-define('CHATWING_VERSION', '1.0.3');
+define('CHATWING_VERSION', '1.0.4');
 define('CHATWING_TEXTDOMAIN', 'chatwing');
 define('CHATWING_PATH', dirname(__FILE__));
 define('CHATWING_CLASS_PATH', CHATWING_PATH . '/classes');
