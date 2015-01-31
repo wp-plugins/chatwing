@@ -1,9 +1,12 @@
 <?php
 
 use Chatwing\IntegrationPlugins\WordPress\Asset;
+use Chatwing\IntegrationPlugins\WordPress\DataModel;
+use Chatwing\IntegrationPlugins\WordPress\ShortCode;
 
+$model = DataModel::getInstance();
 $count = 0;
-// var_dump($boxes);
+
 ?>
 <link rel="stylesheet" type="text/css" href="<?php echo Asset::link('forms-min.css'); ?>
 ">
@@ -18,6 +21,7 @@ $count = 0;
             <th><?php _e('Name', CHATWING_TEXTDOMAIN) ?></th>
             <th><?php _e('Alias', CHATWING_TEXTDOMAIN); ?></th>
             <th><?php _e('Key', CHATWING_TEXTDOMAIN); ?></th>
+            <th>&nbsp;</th>
         </tr>
         </thead>
         <tbody>
@@ -28,6 +32,7 @@ $count = 0;
                     <td><?php echo $box['name']; ?></td>
                     <td><?php echo $box['alias']; ?></td>
                     <td><?php echo $box['key']; ?></td>
+                    <td><input type="button" class="pure-button pure-button-primary" value="<?php _e('Get shortcode', CHATWING_TEXTDOMAIN) ?>" onclick="prompt('Shortcode for chatbox <?php echo $box['alias'] ?>', '<?php echo esc_attr(ShortCode::generateShortCode(array('key' => $box['key']))) ?>')" /></td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>

@@ -4,7 +4,7 @@ Donate link: http://chatwing.com/
 Tags: chatwing, chatbox, community, admin, Chat, chat box, chat online, chat software, chat system, Chat Widget, chatbox, chat wing, Commenting, commenting system, contact plugin, contact us, customer support, envolve, free chat, IM Chat, live chat, live chat inc, live chat services, live chat software, live chatting, live help, live support, live web chat, livechat, online chat, online support, php live chat, plugin, Shoutbox, social chat, support software, Website Chat, widget, WordPress chat, wordpress live chat, wordpress live chat plugin, WordPress Plugin, wordpress chat, chatroom, chat room, chat rooms
 Requires at least: 3.0.1
 Tested up to: 3.8
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,9 @@ Yes, you should have an access token in order to use this plugin. Please go to u
 4. Customize plugin settings
 5. Insert chatbox as widget
 == Changelog ==
+= 1.0.5 =
+* Now user can get shortcode for chatbox from plugin setting page
+
 = 1.0.1 =
 * Fix plugin not use production server
 
