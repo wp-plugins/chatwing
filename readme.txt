@@ -48,6 +48,9 @@ Yes, you should have an access token in order to use this plugin. Please go to u
 4. Customize plugin settings
 5. Insert chatbox as widget
 == Changelog ==
+= 1.0.7 =
+- Fix incorrect avatar URL
+
 = 1.0.6 =
 - Fix issue when enabling SSL premium feature
 - Update to latest API version.
