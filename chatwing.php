@@ -7,14 +7,14 @@
 Plugin Name: Chatwing
 Plugin URI: http://chatwing.com/
 Description: Chatwing offers an unlimited live website or blog chat experience. This chat widget specializes in delivering real-time communication at any given time. Engage in a free chat with visitors and friends!
-Version: 1.0.6
+Version: 1.0.7
 Author: chatwing
 Author URI: http://chatwing.com/
 License: GPLv2 or later
 Text Domain: chatwing
 */
 
-define('CHATWING_VERSION', '1.0.6');
+define('CHATWING_VERSION', '1.0.7');
 define('CHATWING_TEXTDOMAIN', 'chatwing');
 define('CHATWING_PATH', dirname(__FILE__));
 define('CHATWING_CLASS_PATH', CHATWING_PATH . '/classes');

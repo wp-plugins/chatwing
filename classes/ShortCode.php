@@ -45,12 +45,22 @@ class ShortCode
         ) {
             $user = wp_get_current_user();
             if ($user->ID) {
+                $avatar = simplexml_load_string(get_avatar($user->ID));
+                if ($avatar) {
+                    $attributes = $avatar->attributes();
+                    $avatar = (string) $attributes['src'];
+                } else {
+                    $avatar = 'http://chatwing.com/images/no-avatar.gif';
+                }
+
                 $customSession = array(
                     'id' => $user->ID,
                     'name' => $user->user_nicename,
-                    'avatar' => '',
+                    'avatar' => $avatar,
                     'expiration' => round(microtime(true) * 1000) + 60 * 60 * 100
                 );
+
+                var_dump($customSession);
                 $box->setParam('custom_session', $customSession);
                 $box->setSecret($params['custom_login_secret']);
             }
