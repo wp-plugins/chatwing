@@ -12,7 +12,7 @@ class DataModel extends Object
 
     function __construct()
     {
-        $this->getAccessToken();
+
     }
 
     /**
@@ -38,7 +38,7 @@ class DataModel extends Object
             try {
                 $this->token = DataEncryptionHelper::decrypt(get_option('chatwing_access_token'));
             } catch (\Exception $e) {
-
+                die($e->getMessage());
             }
         }
         return $this->token;

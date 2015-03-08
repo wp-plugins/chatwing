@@ -6,9 +6,6 @@
 
 namespace Chatwing\Encryption;
 
-use Chatwing\Exception\ChatwingException;
-use Exception;
-
 class DataEncryptionHelper
 {
     protected static $encryptionKey = null;
@@ -28,10 +25,6 @@ class DataEncryptionHelper
      */
     public static function getEncryptionKey()
     {
-        if (is_null(static::$encryptionKey)) {
-            throw new Exception("No encryption key defined");
-        }
-
         return static::$encryptionKey;
     }
 

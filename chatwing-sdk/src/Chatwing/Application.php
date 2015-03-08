@@ -12,9 +12,6 @@ class Application extends Container
      */
     protected static $container = null;
 
-    /**
-     * @return Container
-     */
     public static function getInstance()
     {
         if (is_null(static::$container)) {

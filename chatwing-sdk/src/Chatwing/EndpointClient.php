@@ -8,7 +8,6 @@ namespace Chatwing;
 
 use Chatwing\Api\Action;
 use Chatwing\Api\Response;
-use Exception;
 
 class EndpointClient extends Object
 {
@@ -113,11 +112,10 @@ class EndpointClient extends Object
 
             $queryUri = $action->getActionUri();
             $this->setData('client_id', $this->getApiInstance()->getClientId());
-            $data = $this->getData();
-            // $data = array_merge(
-            //     $this->getData(),
-            //     $action->getData()
-            // ); // merge action data and current data
+             $data = array_merge(
+                 $this->getData(),
+                 $action->getParams()
+             ); // merge action data and current data
 
             if ($action->isAuthenticationRequired()) {
                 $data = array_merge(
@@ -172,11 +170,11 @@ class EndpointClient extends Object
             curl_close($this->ch);
             $result = json_decode($result, true);
             if (!$result) {
-                throw new Exception("Invalid response", $responseStatus);
+                throw new \HttpException("Invalid response", $responseStatus);
             }
 
             $result['http_code'] = $responseStatus;
-        } catch (Exception $e) {
+        } catch (\HttpException $e) {
             $result = array(
                 'success' => false,
                 'http_code' => $e->getCode(),

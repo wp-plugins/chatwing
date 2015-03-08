@@ -98,7 +98,7 @@ class CustomSession extends Object
     {
         $secret = $this->getSecret();
         if (!$secret) {
-            throw new \InvalidArgumentException('Secret has not been set !!');
+            throw new ChatwingException(array('message' => 'Secret has not been set !!'));
         }
         $md5Secret = md5($this->getSecret());
         $encryptionKey = substr($md5Secret, 0, 16);

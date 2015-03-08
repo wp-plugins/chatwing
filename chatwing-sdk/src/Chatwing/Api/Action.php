@@ -39,7 +39,7 @@ class Action extends Object
 
     public function getParams()
     {
-        return $this->getData();
+        return $this->getData('params');
     }
 
     /**
@@ -80,7 +80,7 @@ class Action extends Object
         if (file_exists($path)) {
             self::$actionList = include $path;
         } else {
-            throw new \InvalidArgumentException('Action list not found');
+            throw new ChatwingException(array('message' => "Action list not found", 'code' => 0));
         }
     }
 

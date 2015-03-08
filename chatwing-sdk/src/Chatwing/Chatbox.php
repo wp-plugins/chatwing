@@ -15,6 +15,7 @@ class Chatbox extends Object
      * @var Api
      */
     protected $api;
+    protected $id = null;
     protected $key = null;
     protected $alias = null;
     protected $params = array();
@@ -33,18 +34,27 @@ class Chatbox extends Object
      */
     public function getChatboxUrl()
     {
-        $chatboxName = $this->getAlias() ? $this->getAlias() : $this->getKey();
-        if (!$chatboxName) {
-            throw new \InvalidArgumentException('No chatbox key or alias defined!');
+        if (!$this->getId()) {
+            throw new ChatwingException("Chatbox ID is not set!");
         }
 
-        $chatboxUrl = 'http://' . $this->api->getAPIServer() . '/' . (!$this->getAlias() && $this->getKey() ? 'chatbox/' : '') . $chatboxName;
-        if (!empty($this->params)) {
-            if ($this->getSecret()) {
-                $this->getEncryptedSession(); // call this method to create encrypted session
+        // get chatbox data
+        $response = $this->api->call('chatbox/read', array('id' => $this->getId()));
+
+        if ($response->isSuccess()) {
+            $chatboxData = $response->get('data');
+            $chatboxUrl = $chatboxData['urls']['full'];
+            if (!empty($this->params)) {
+                if ($this->getSecret()) {
+                    $this->getEncryptedSession(); // call this method to create encrypted session
+                }
+                $chatboxUrl .= '?' . http_build_query($this->params);
             }
-            $chatboxUrl .= '?' . http_build_query($this->params);
+        } else {
+            throw new ChatwingException("Invalid chatbox ID");
         }
+
+
         return $chatboxUrl;
     }
 
@@ -57,6 +67,23 @@ class Chatbox extends Object
     {
         $url = $this->getChatboxUrl();
         return '<iframe src="'. $url .'" height="'. $this->getData('height') .'" width="'. $this->getData('width') .'" frameborder="0"></iframe>';
+    }
+
+    /**
+     * Set chatbox ID
+     * @param string $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return null
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**

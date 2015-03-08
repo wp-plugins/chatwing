@@ -7,7 +7,7 @@
 define('CHATWING_SDK_PATH', dirname(__FILE__));
 
 /**
- * Autoloader function for PSR-4 coding style
+ * Autoloader function for PSR-0 coding style
  * @param  string $class 
  * @return boolean        
  */

@@ -7,5 +7,9 @@ return array(
     'user/chatbox/list' => array(
         'type' => 'get',
         'auth' => true
+    ),
+    'chatbox/read' => array(
+        'type' => 'get',
+        'auth' => true
     )
 );

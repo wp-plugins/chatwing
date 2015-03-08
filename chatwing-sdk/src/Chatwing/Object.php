@@ -24,7 +24,6 @@ class Object
     /**
      * @param $key
      * @param null $value
-     * @return $this
      */
     public function setData($key, $value = null)
     {
@@ -34,8 +33,6 @@ class Object
         } else {
             $this->data[$key] = $value;
         }
-
-        return $this;
     }
 
     /**
@@ -128,7 +125,7 @@ class Object
                 break;
 
             default:
-                throw new \InvalidArgumentException("Method {$name} is not found!!!");
+                throw new ChatwingException(array('message' => "Method not found"));
         }
     }
 

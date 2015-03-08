@@ -25,7 +25,7 @@ class ShortCode
 
         $params = array_merge($defaultAttributes, $params);
 
-        if (empty($params['key']) && empty($params['alias'])) {
+        if (empty($params['id'])) {
             return '';
         }
 
@@ -33,11 +33,7 @@ class ShortCode
          * @var \Chatwing\Chatbox $box
          */
         $box = App::getInstance()->get('chatbox');
-        if (!empty($params['key'])) {
-            $box->setKey($params['key']);
-        } else {
-            $box->setAlias($params['alias']);
-        }
+        $box->setId($params['id']);
 
 
         $box->setData('width', $params['width']);
@@ -48,14 +44,16 @@ class ShortCode
             && !empty($params['custom_login_secret'])
         ) {
             $user = wp_get_current_user();
-            $customSession = array(
-                'id' => $user->ID,
-                'name' => $user->user_nicename,
-                'avatar' => '',
-                'expiration' => round(microtime(true) * 1000) + 60 * 60 * 100
-            );
-            $box->setParam('custom_session', $customSession);
-            $box->setSecret($params['custom_login_secret']);
+            if ($user->ID) {
+                $customSession = array(
+                    'id' => $user->ID,
+                    'name' => $user->user_nicename,
+                    'avatar' => '',
+                    'expiration' => round(microtime(true) * 1000) + 60 * 60 * 100
+                );
+                $box->setParam('custom_session', $customSession);
+                $box->setSecret($params['custom_login_secret']);
+            }
         }
 
         return $box->getIframe();
@@ -68,15 +66,14 @@ class ShortCode
      */
     public static function generateShortCode($params = array())
     {
-        if (empty($params) || (empty($params['key']) && empty($params['alias']))) {
+        if (empty($params) || (empty($params['id']))) {
             return '';
         }
 
         $model = DataModel::getInstance();
 
         $defaultAttributes = array(
-            'key' => '',
-            'alias' => '',
+            'id' => '',
             'width' => $model->getOption('width'),
             'height' => $model->getOption('height'),
             'enable_custom_login' => '0',

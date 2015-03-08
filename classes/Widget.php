@@ -23,7 +23,7 @@ class Widget extends \WP_Widget
         echo $args['before_widget'];
         echo $args['before_title'] . $instance['title'] . $args['after_title'];
         echo ShortCode::render(array(
-            'key' => $instance['chatbox'],
+            'id' => $instance['chatbox'],
             'width' => !empty($instance['width']) ? $instance['width'] : '',
             'height' => !empty($instance['height']) ? $instance['height'] : '',
             'enable_custom_login' => !empty($instance['enable_custom_login']) ? $instance['enable_custom_login'] : false,
@@ -35,7 +35,7 @@ class Widget extends \WP_Widget
     public function form($instance)
     {
         $boxes = DataModel::getInstance()->getBoxList();
-        $currentKey = !empty($instance['chatbox']) ? $instance['chatbox'] : null;
+        $currentID = !empty($instance['chatbox']) ? $instance['chatbox'] : null;
         ?>
         <p>
             <label
@@ -52,7 +52,7 @@ class Widget extends \WP_Widget
                     id="<?php echo $this->get_field_id('chatbox'); ?>">
                 <?php if (!empty($boxes)): foreach ($boxes as $box): ?>
                     <option
-                        value="<?php echo $box['key'] ?>" <?php if ($box['key'] == $currentKey) echo 'selected="selected"'; ?>><?php echo $box['alias']; ?></option>
+                        value="<?php echo $box['id'] ?>" <?php if ($box['id'] == $currentID) echo 'selected="selected"'; ?>><?php echo $box['alias']; ?></option>
                 <?php endforeach;endif; ?>
             </select>
         </p>
