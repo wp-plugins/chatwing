@@ -60,7 +60,6 @@ class ShortCode
                     'expiration' => round(microtime(true) * 1000) + 60 * 60 * 100
                 );
 
-                var_dump($customSession);
                 $box->setParam('custom_session', $customSession);
                 $box->setSecret($params['custom_login_secret']);
             }

@@ -24,7 +24,7 @@ class Admin extends PluginBase
 
     protected function registerFilters()
     {
-    	
+
     }
 
     public function registerAdminMenu()
@@ -125,4 +125,5 @@ class Admin extends PluginBase
         	throw new InvalidArgumentException("Tempalte {$templateName} doesn't exist");
         }
     }
+
 }

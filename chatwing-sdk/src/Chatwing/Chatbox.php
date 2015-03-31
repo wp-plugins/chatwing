@@ -21,9 +21,28 @@ class Chatbox extends Object
     protected $params = array();
     protected $secret = null;
 
+    protected $baseUrl = null;
+
     public function __construct(Api $api)
     {
         $this->api = $api;
+    }
+
+    public function getBaseUrl()
+    {
+        if (is_null($this->baseUrl)) {
+            // get chatbox data
+            $response = $this->api->call('chatbox/read', array('id' => $this->getId()));
+
+            if ($response->isSuccess()) {
+                $chatboxData = $response->get('data');
+                $this->baseUrl = $chatboxData['urls']['full'];
+            } else {
+                throw new ChatwingException("Invalid chatbox ID");
+            }
+        }
+
+        return $this->baseUrl;
     }
 
     /**
@@ -38,22 +57,14 @@ class Chatbox extends Object
             throw new ChatwingException("Chatbox ID is not set!");
         }
 
-        // get chatbox data
-        $response = $this->api->call('chatbox/read', array('id' => $this->getId()));
+        $chatboxUrl = $this->getBaseUrl();
 
-        if ($response->isSuccess()) {
-            $chatboxData = $response->get('data');
-            $chatboxUrl = $chatboxData['urls']['full'];
-            if (!empty($this->params)) {
-                if ($this->getSecret()) {
-                    $this->getEncryptedSession(); // call this method to create encrypted session
-                }
-                $chatboxUrl .= '?' . http_build_query($this->params);
+        if (!empty($this->params)) {
+            if ($this->getSecret()) {
+                $this->getEncryptedSession(); // call this method to create encrypted session
             }
-        } else {
-            throw new ChatwingException("Invalid chatbox ID");
+            $chatboxUrl .= '?' . http_build_query($this->params);
         }
-
 
         return $chatboxUrl;
     }

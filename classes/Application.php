@@ -34,7 +34,7 @@ class Application extends PluginBase
 
 	protected function registerFilters()
 	{
-
+        add_filter('login_redirect', array($this, 'handleUserLogin'), 10, 3);
 	}
 
 	public function onPluginActivation()
@@ -61,5 +61,92 @@ class Application extends PluginBase
 			$admin->run();
 		}
 	}
+
+
+    /**
+     * @param $redirectUrl
+     * @param string $requestedRedirectUrl
+     * @param \WP_Error|\WP_User $user
+     * @return string
+     */
+    public function handleUserLogin($redirectUrl, $requestedRedirectUrl = '', $user = null)
+    {
+        $targetURL = $redirectUrl;
+
+        if ($user instanceof \WP_User && $user->ID) {
+            // login successfully
+            if (!empty($requestedRedirectUrl)) {
+                $targetURL = $requestedRedirectUrl;
+            }
+
+            $targetURL = urldecode($targetURL);
+            $parsedData = parse_url($targetURL);
+            if (!empty($parsedData['host'])
+                && in_array($parsedData['host'], array('chatwing.com', 'staging.chatwing.com'))
+            ) {
+
+                // try to get the chatbox alias
+                // then determine if we have custom redirection URL
+                $parts = isset($parsedData['path']) ? array_filter(explode('/', $parsedData['path'])) : array();
+                if (count($parts) > 1) {
+                    $chatboxKey = $parts[2];
+                    $boxId = null;
+                    $boxList = $this->getModel()->getBoxList();
+                    foreach ($boxList as $box) {
+                        if ($box['key'] == $chatboxKey) {
+                            $boxId = $box['id'];
+                            break;
+                        }
+                    }
+
+                    if ($boxId) {
+                        $response = Chatwing::getInstance()->get('api')->call('chatbox/read', array('id' => $boxId));
+                        if ($response->isSuccess()){
+                            $chatboxData = $response->get('data');
+                            $secret = $chatboxData['custom_login']['secret'];
+                            $customSession = Helper::prepareUserInformationForCustomLogin($user);
+
+                            $box = Chatwing::getInstance()->get('chatbox');
+                            $box->setId($boxId);
+                            $box->setParam('custom_session', $customSession);
+                            $box->setSecret($secret);
+
+                            $targetURL = $box->getChatboxUrl();
+
+                            ?>
+                            <script>
+                                window.opener.location = '<?php echo $targetURL;?>';
+                                self.close();
+                            </script>
+                            <?php
+                            die;
+                        }
+                    }
+
+                }
+            }
+        } else {
+            switch (true) {
+                case !empty($_GET['redirect_url']):
+                    $targetURL = $_GET['redirect_url'];
+                    break;
+
+                case !empty($requestedRedirectUrl):
+                    $targetURL = $requestedRedirectUrl;
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+
+        return urldecode($targetURL);
+    }
+
+    protected function redirectUser($url, WP_User $user)
+    {
+
+    }
 
 }
